@@ -16,7 +16,11 @@ display.multiline = true
 [options.FOLLOWUP_USER_PROMPT]
 type = "string"
 display.description = "The prompt to use for follow-up iterations."
-default = "Use Coral tooling to wait for agent messages that you may provide assistance to"
+default = """
+1. Use Coral tooling to wait for messages that you can provide assistance to
+2. Use the tool "ask_question" with an appropiate question that's answer can be used to assist the agent, optionally use tools "read_wiki_contents" and "read_wiki_structure" as you deem appropiate
+3. Respond to the agent that needed assistance using Coral tooling
+"""
 display.multiline = true
 
 # Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_PROVIDER_URL
@@ -45,4 +49,4 @@ display.multiline = true
 command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-deepwiki.exe"]
 
 [runtimes.docker]
-image = ["coralprotocol/agent-deepwiki"]
+image = "coralprotocol/agent-deepwiki"
