@@ -1,0 +1,61 @@
+edition = 2
+
+[agent]
+name = "deepwiki"
+version = "0.0.1"
+
+[options]
+MAX_ITERATIONS = { type = "i32", default = 10, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
+
+[options.EXTRA_SYSTEM_PROMPT]
+type = "string"
+display.description = "Additional system prompt instructions to customize the agent's behavior."
+default = ""
+display.multiline = true
+
+[options.EXTRA_INITIAL_USER_PROMPT]
+type = "string"
+display.description = "Additional instructions to be included in the initial user message."
+default = ""
+display.multiline = true
+
+[options.FOLLOWUP_USER_PROMPT]
+type = "string"
+display.description = "The prompt to use for follow-up iterations."
+default = "[automated message] Continue fulfilling your responsibilities collaboratively to the best of your ability."
+display.multiline = true
+
+# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_PROVIDER_URL
+#[options.MODEL_PROVIDER_URL]
+#type = "string"
+#description = "The base URL for the LLM provider API (OpenAI compatible)"
+#default = "https://openrouter.ai/api/v1/chat/completions"
+
+# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_API_KEY
+#MODEL_API_KEY = { type = "string", required = true, description = "The API key for the LLM provider (OpenAI compatible)" }
+
+#MODEL_ID = { type = "string", default = "openai/gpt-5-mini", description = "The model ID to use for the LLM provider" }
+
+#DEVIN_API_KEY = { type = "string", display.description = "The devin.ai api key/token" }
+
+
+[options.SYSTEM_PROMPT]
+type = "string"
+display.description = "The system prompt to use"
+default = """
+You are the Deep Wiki agent, you have special tools for gaining unique insights for GitHub repositories.
+
+You are to assist other agents using your tooling when requested or when you deem appropiate.
+
+You must only provide assistance for GitHub related topics.
+
+-- Start of messages and status --
+<resource>coral://instruction</resource>
+<resource>coral://state</resource>
+-- End of messages and status --
+
+"""
+display.multiline = true
+
+[runtimes.executable]
+command = ["W:\\Coral\\agents\\koog\\gradlew.bat", "run"]
