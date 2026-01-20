@@ -5,7 +5,8 @@ edition = "2024"
 
 [dependencies]
 tokio = { version = "1.49.0", features = ["rt-multi-thread", "rt", "macros"] }
-coral-rs = "0.2.0"
+coral-rs = "0.2.1"
+reqwest = "0.13.1"
 
 [build-dependencies]
-coral-rs = "0.2.0"
+coral-rs = "0.2.1"
