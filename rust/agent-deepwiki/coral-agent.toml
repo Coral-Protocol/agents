@@ -7,6 +7,7 @@ version = "0.0.1"
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
+MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
 
 [options.EXTRA_SYSTEM_PROMPT]
 type = "string"

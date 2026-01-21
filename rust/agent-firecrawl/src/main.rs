@@ -6,9 +6,9 @@ use coral_rs::completion_evaluated_prompt::CompletionEvaluatedPrompt;
 use coral_rs::init_tracing;
 use coral_rs::mcp_server::McpConnectionBuilder;
 use coral_rs::repeating_prompt_stream::repeating_prompt_stream;
-use coral_rs::rig::client::completion::CompletionClientDyn;
-use coral_rs::rig::client::ProviderClient;
-use coral_rs::rig::providers::openrouter;
+use coral_rs::rig::client::{CompletionClient, ProviderClient};
+use coral_rs::rig::providers::openrouter::CLAUDE_3_7_SONNET;
+use coral_rs::rig::providers::{anthropic, openai, openrouter};
 use std::time::Duration;
 
 include!(concat!(env!("OUT_DIR"), "/coral_options.rs"));
@@ -23,10 +23,13 @@ async fn main() {
         .await
         .expect("Failed to connect to the Coral server");
 
-    let replicate = McpConnectionBuilder::builder()
-        .build_stdio("/app/run.sh", Vec::<&str>::new(), "replicate")
+    let firecrawl_mcp = McpConnectionBuilder::builder()
+        .build_streamable_http(format!(
+            "https://mcp.firecrawl.dev/{}/v2/mcp",
+            std::env::var("FIRECRAWL_API_KEY").expect("FIRECRAWL_API_KEY is required")
+        ))
         .await
-        .expect("Failed to connect to the replicate MCP server");
+        .expect("Failed to connect to the Firecrawl MCP server");
 
     let completion_agent = openrouter::Client::from_env()
         .agent("openai/gpt-5")
@@ -47,7 +50,7 @@ async fn main() {
         .preamble(system_prompt)
         .claim_manager(claim_manager)
         .mcp_server(coral_mcp.clone())
-        .mcp_server(replicate);
+        .mcp_server(firecrawl_mcp);
 
     let repeating_user_prompt =
         CompletionEvaluatedPrompt::from_string(options.followup_user_prompt);

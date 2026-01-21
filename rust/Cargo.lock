@@ -12,6 +12,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "agent-firecrawl"
+version = "0.1.0"
+dependencies = [
+ "coral-rs",
+ "reqwest 0.13.1",
+ "tokio",
+]
+
+[[package]]
 name = "agent-replicate"
 version = "0.1.0"
 dependencies = [
@@ -66,6 +75,17 @@ name = "async-stream-impl"
 version = "0.3.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c7c24de15d275a1ecfd47a380fb4d5ec9bfe0933f309ed5e705b775596a3574d"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "async-trait"
+version = "0.1.89"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "9035ad2d096bed7955a320ee7e2230574d28fd3c3a0f186cbea1ff3c7eed5dbb"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -210,9 +230,9 @@ dependencies = [
 
 [[package]]
 name = "coral-rs"
-version = "0.2.2"
+version = "0.2.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "17c7c90ea7826dc2a9da8bb40620c56de4babf34cc01881f129599e44e146ddb"
+checksum = "c8becc7700c66915c37354828899e99c158592f26e2c7dae98fb978d1df29d2d"
 dependencies = [
  "base64",
  "byteorder",
@@ -1180,6 +1200,26 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9b4f627cb1b25917193a259e49bdad08f671f8d9708acfd5fe0a8c1455d87220"
 
 [[package]]
+name = "pin-project"
+version = "1.1.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "677f1add503faace112b9f1373e43e9e054bfdd22ff1a63c1bc485eaec6a6a8a"
+dependencies = [
+ "pin-project-internal",
+]
+
+[[package]]
+name = "pin-project-internal"
+version = "1.1.10"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6e918e4ff8c4549eb882f14b3a4bc8c8bc93de829416eacf579f1207a8fbf861"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
 name = "pin-project-lite"
 version = "0.2.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1590,37 +1630,26 @@ dependencies = [
 ]
 
 [[package]]
-name = "reqwest-eventsource"
-version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "632c55746dbb44275691640e7b40c907c16a2dc1a5842aa98aaec90da6ec6bde"
-dependencies = [
- "eventsource-stream",
- "futures-core",
- "futures-timer",
- "mime",
- "nom",
- "pin-project-lite",
- "reqwest 0.12.28",
- "thiserror 1.0.69",
-]
-
-[[package]]
 name = "rig-core"
-version = "0.18.2"
+version = "0.27.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e588b3da859ea33f7132e9b3312a9aeda499d166cda63329fb68f7d022aa75bb"
+checksum = "3799afd8ba38d90d9886be5bf596b0159043f88598b40e1f5aa08aad488f2223"
 dependencies = [
  "as-any",
  "async-stream",
  "base64",
  "bytes",
+ "eventsource-stream",
+ "fastrand",
  "futures",
+ "futures-timer",
  "glob",
+ "http",
+ "mime",
  "mime_guess",
  "ordered-float",
+ "pin-project-lite",
  "reqwest 0.12.28",
- "reqwest-eventsource",
  "rmcp",
  "schemars 1.2.0",
  "serde",
@@ -1628,6 +1657,7 @@ dependencies = [
  "thiserror 2.0.18",
  "tokio",
  "tracing",
+ "tracing-futures",
  "url",
 ]
 
@@ -1647,10 +1677,11 @@ dependencies = [
 
 [[package]]
 name = "rmcp"
-version = "0.5.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2faf35b7d3c4b7f8c21c45bb014011b32a0ce6444bf6094da04daab01a8c3c34"
+checksum = "eaa07b85b779d1e1df52dd79f6c6bffbe005b191f07290136cc42a142da3409a"
 dependencies = [
+ "async-trait",
  "base64",
  "chrono",
  "futures",
@@ -1676,9 +1707,9 @@ dependencies = [
 
 [[package]]
 name = "rmcp-macros"
-version = "0.5.0"
+version = "0.9.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ad9720d9d2a943779f1dc3d47fa9072c7eeffaff4e1a82f67eb9f7ea52696091"
+checksum = "0f6fa09933cac0d0204c8a5d647f558425538ed6a0134b1ebb1ae4dc00c96db3"
 dependencies = [
  "darling",
  "proc-macro2",
@@ -2434,6 +2465,18 @@ checksum = "db97caf9d906fbde555dd62fa95ddba9eecfd14cb388e4f491a66d74cd5fb79a"
 dependencies = [
  "once_cell",
  "valuable",
+]
+
+[[package]]
+name = "tracing-futures"
+version = "0.2.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "97d095ae15e245a057c8e8451bab9b3ee1e1f68e9ba2b4fbc18d0ac5237835f2"
+dependencies = [
+ "futures",
+ "futures-task",
+ "pin-project",
+ "tracing",
 ]
 
 [[package]]

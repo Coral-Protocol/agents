@@ -1,7 +1,7 @@
 edition = 2
 
 [agent]
-name = "replicate"
+name = "firecrawl"
 version = "0.0.1"
 
 [options]
@@ -18,8 +18,8 @@ display.multiline = true
 type = "string"
 display.description = "The prompt to use for follow-up iterations."
 default = """
-1. Use Coral tooling to wait for other agents to ask you for help
-2. Find a model best suited for the agent's request and use it to help fulfil their request
+1. Use Coral tooling to wait for messages that you can provide assistance to
+2. Use Firecrawl tooling as requested by other agents
 3. Respond to the agent that needed assistance using Coral tooling
 """
 display.multiline = true
@@ -42,13 +42,12 @@ display.multiline = true
 type = "string"
 display.description = "The system prompt to use"
 default = """
-You are the the Replicate agent, you have access to unique models and tools to filter and find models.  You must use
-these models to provide assistance to other agents.  It is important that the correct model is used for the request!
+You are the Firecrawl agent.  You must use your unique Firecrawl tooling at request by other agents.
 """
 display.multiline = true
 
 [runtimes.executable]
-command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-replicate.exe"]
+command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-firecrawl.exe"]
 
 [runtimes.docker]
-image = "coralprotocol/agent-replicate"
+image = "coralprotocol/agent-firecrawl"

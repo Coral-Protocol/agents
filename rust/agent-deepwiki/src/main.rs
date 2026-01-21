@@ -6,8 +6,8 @@ use coral_rs::completion_evaluated_prompt::CompletionEvaluatedPrompt;
 use coral_rs::init_tracing;
 use coral_rs::mcp_server::McpConnectionBuilder;
 use coral_rs::repeating_prompt_stream::repeating_prompt_stream;
-use coral_rs::rig::client::CompletionClient;
-use coral_rs::rig::providers::openai;
+use coral_rs::rig::client::{CompletionClient, ProviderClient};
+use coral_rs::rig::providers::openrouter;
 use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
 use std::time::Duration;
 
@@ -19,43 +19,35 @@ async fn main() {
 
     let options = Options::parse().expect("An error occurred parsing the arguments");
 
-    let coral_mcp = McpConnectionBuilder::from_coral_env()
-        .connect()
+    let coral_mcp = McpConnectionBuilder::build_coral_sse()
         .await
         .expect("Failed to connect to the Coral server");
 
-    let devin_mcp = McpConnectionBuilder::sse_with_headers(
-        "https://mcp.devin.ai/sse",
-        HeaderMap::from_iter(
-            [(
-                AUTHORIZATION,
-                HeaderValue::from_str(
-                    format!(
-                        "Bearer {}",
-                        std::env::var("DEVIN_API_KEY").expect("DEVIN_API_KEY is required")
+    let devin_mcp = McpConnectionBuilder::builder()
+        .build_sse_with_headers(
+            "https://mcp.devin.ai/sse",
+            HeaderMap::from_iter(
+                [(
+                    AUTHORIZATION,
+                    HeaderValue::from_str(
+                        format!(
+                            "Bearer {}",
+                            std::env::var("DEVIN_API_KEY").expect("DEVIN_API_KEY is required")
+                        )
+                        .as_str(),
                     )
-                    .as_str(),
-                )
-                .expect("DEVIN_API_KEY gave invalid header value"),
-            )]
-            .into_iter(),
-        ),
-    )
-    .connect()
-    .await
-    .expect("Failed to connect to the Devin MCP server");
+                    .expect("DEVIN_API_KEY gave invalid header value"),
+                )]
+                .into_iter(),
+            ),
+        )
+        .await
+        .expect("Failed to connect to the Devin MCP server");
 
-    let completion_agent = openai::client::Client::new(
-        std::env::var("MODEL_API_KEY")
-            .expect("MODEL_API_KEY is required")
-            .as_str(),
-    )
-    .agent(
-        std::env::var("MODEL_ID")
-            .expect("MODEL_ID is required")
-            .as_str(),
-    )
-    .build();
+    let completion_agent = openrouter::Client::from_env()
+        .agent("openai/gpt-5")
+        .max_tokens(options.max_tokens as u64)
+        .build();
 
     let mut system_prompt = coral_mcp.prompt_with_resources_str(options.system_prompt);
 
