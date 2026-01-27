@@ -31,8 +31,8 @@ async fn main() {
         .await
         .expect("Failed to connect to the Firecrawl MCP server");
 
-    let completion_agent = openrouter::Client::from_env()
-        .agent("openai/gpt-5")
+    let completion_agent = anthropic::Client::from_env()
+        .agent("claude-sonnet-4-5")
         .max_tokens(options.max_tokens as u64)
         .build();
 

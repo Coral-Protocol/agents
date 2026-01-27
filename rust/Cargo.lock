@@ -12,6 +12,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "agent-elevenlabs"
+version = "0.1.0"
+dependencies = [
+ "coral-rs",
+ "reqwest 0.13.1",
+ "tokio",
+]
+
+[[package]]
 name = "agent-firecrawl"
 version = "0.1.0"
 dependencies = [
@@ -230,9 +239,9 @@ dependencies = [
 
 [[package]]
 name = "coral-rs"
-version = "0.2.6"
+version = "0.2.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8becc7700c66915c37354828899e99c158592f26e2c7dae98fb978d1df29d2d"
+checksum = "fa6dd2f9363809ae988b18f02bcc1c22465f76d640006badb0c2a670e66ea5ad"
 dependencies = [
  "base64",
  "byteorder",

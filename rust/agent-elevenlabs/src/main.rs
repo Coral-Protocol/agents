@@ -8,7 +8,7 @@ use coral_rs::mcp_server::McpConnectionBuilder;
 use coral_rs::repeating_prompt_stream::repeating_prompt_stream;
 use coral_rs::rig::client::completion::CompletionClientDyn;
 use coral_rs::rig::client::ProviderClient;
-use coral_rs::rig::providers::{anthropic, openrouter};
+use coral_rs::rig::providers::openrouter;
 use std::time::Duration;
 
 include!(concat!(env!("OUT_DIR"), "/coral_options.rs"));
@@ -28,8 +28,8 @@ async fn main() {
         .await
         .expect("Failed to connect to the replicate MCP server");
 
-    let completion_agent = anthropic::Client::from_env()
-        .agent("claude-sonnet-4-5")
+    let completion_agent = openrouter::Client::from_env()
+        .agent("openai/gpt-5")
         .max_tokens(options.max_tokens as u64)
         .build();
 

@@ -24,20 +24,6 @@ default = """
 """
 display.multiline = true
 
-# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_PROVIDER_URL
-#[options.MODEL_PROVIDER_URL]
-#type = "string"
-#description = "The base URL for the LLM provider API (OpenAI compatible)"
-#default = "https://openrouter.ai/api/v1/chat/completions"
-
-# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_API_KEY
-#MODEL_API_KEY = { type = "string", required = true, description = "The API key for the LLM provider (OpenAI compatible)" }
-
-#MODEL_ID = { type = "string", default = "openai/gpt-5-mini", description = "The model ID to use for the LLM provider" }
-
-#DEVIN_API_KEY = { type = "string", display.description = "The devin.ai api key/token" }
-
-
 [options.SYSTEM_PROMPT]
 type = "string"
 display.description = "The system prompt to use"

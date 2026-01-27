@@ -7,7 +7,7 @@ use coral_rs::init_tracing;
 use coral_rs::mcp_server::McpConnectionBuilder;
 use coral_rs::repeating_prompt_stream::repeating_prompt_stream;
 use coral_rs::rig::client::{CompletionClient, ProviderClient};
-use coral_rs::rig::providers::openrouter;
+use coral_rs::rig::providers::{anthropic};
 use reqwest::header::{AUTHORIZATION, HeaderMap, HeaderValue};
 use std::time::Duration;
 
@@ -44,8 +44,8 @@ async fn main() {
         .await
         .expect("Failed to connect to the Devin MCP server");
 
-    let completion_agent = openrouter::Client::from_env()
-        .agent("openai/gpt-5")
+    let completion_agent = anthropic::Client::from_env()
+        .agent("claude-sonnet-4-5")
         .max_tokens(options.max_tokens as u64)
         .build();
 
