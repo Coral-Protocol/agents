@@ -8,8 +8,8 @@ use coral_rs::mcp_server::McpConnectionBuilder;
 use coral_rs::repeating_prompt_stream::repeating_prompt_stream;
 use coral_rs::rig::client::completion::CompletionClientDyn;
 use coral_rs::rig::client::ProviderClient;
-use coral_rs::rig::providers::openrouter;
 use std::time::Duration;
+use coral_rs::rig::providers::anthropic;
 
 include!(concat!(env!("OUT_DIR"), "/coral_options.rs"));
 
@@ -23,13 +23,13 @@ async fn main() {
         .await
         .expect("Failed to connect to the Coral server");
 
-    let replicate = McpConnectionBuilder::builder()
-        .build_stdio("/app/run.sh", Vec::<&str>::new(), "replicate")
+    let elevenlabs = McpConnectionBuilder::builder()
+        .build_stdio("uvx", vec!["elevenlabs-mcp"], "elevenlabs")
         .await
-        .expect("Failed to connect to the replicate MCP server");
+        .expect("Failed to connect to the elevenlabs MCP server");
 
-    let completion_agent = openrouter::Client::from_env()
-        .agent("openai/gpt-5")
+    let completion_agent = anthropic::Client::from_env()
+        .agent("claude-sonnet-4-5")
         .max_tokens(options.max_tokens as u64)
         .build();
 
@@ -47,7 +47,7 @@ async fn main() {
         .preamble(system_prompt)
         .claim_manager(claim_manager)
         .mcp_server(coral_mcp.clone())
-        .mcp_server(replicate);
+        .mcp_server(elevenlabs);
 
     let repeating_user_prompt =
         CompletionEvaluatedPrompt::from_string(options.followup_user_prompt);
