@@ -9,18 +9,19 @@ MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximu
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
 MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
 
-[options.EXTRA_SYSTEM_PROMPT]
+[options.INITIAL_USER_PROMPT]
 type = "string"
-display.description = "Additional system prompt instructions to customize the agent's behavior."
-display.multiline = true
+default = """
+[automated message] You are an autonomous agent designed to assist users by collaborating with other agents."
+"If no instructions are provided, consider waiting for mentions until another agent provides further direction."
+"Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way."
+"""
 
 [options.FOLLOWUP_USER_PROMPT]
 type = "string"
 display.description = "The prompt to use for follow-up iterations."
 default = """
-1. Use Coral tooling to wait for messages that you can provide assistance to
-2. Use the tool "ask_question" with an appropiate question that's answer can be used to assist the agent, optionally use tools "read_wiki_contents" and "read_wiki_structure" as you deem appropiate
-3. Respond to the agent that needed assistance using Coral tooling
+[automated message] Continue fulfilling your responsibilities collaboratively to the best of your ability.
 """
 display.multiline = true
 
@@ -30,6 +31,11 @@ display.description = "The system prompt to use"
 default = """
 You are the Deep Wiki agent, you have special tools for gaining unique insights for GitHub repositories.
 """
+display.multiline = true
+
+[options.EXTRA_SYSTEM_PROMPT]
+type = "string"
+display.description = "Extra system text to append to the base system text"
 display.multiline = true
 
 [runtimes.executable]
