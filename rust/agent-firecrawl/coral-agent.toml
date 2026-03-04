@@ -69,7 +69,7 @@ You are the Firecrawl agent.  You must use your unique Firecrawl tooling at requ
 display.multiline = true
 
 [runtimes.executable]
-path = "target/release/agent-firecrawl"
+path = "../target/release/agent-firecrawl"
 
 [runtimes.docker]
 image = "coralprotocol/agent-firecrawl"

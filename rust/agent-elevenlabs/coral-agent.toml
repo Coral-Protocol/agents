@@ -56,7 +56,7 @@ You are the the Elevenlabs agent, you have access to unique audio processing too
 display.multiline = true
 
 [runtimes.executable]
-path = "target/release/agent-elevenlabs"
+path = "../target/release/agent-elevenlabs"
 
 [runtimes.docker]
 image = "coralprotocol/agent-elevenlabs"

@@ -70,7 +70,7 @@ these models to provide assistance to other agents.  It is important that the co
 display.multiline = true
 
 [runtimes.executable]
-path = "target/release/agent-replicate"
+path = "../target/release/agent-replicate"
 
 [runtimes.docker]
 image = "coralprotocol/agent-replicate"
