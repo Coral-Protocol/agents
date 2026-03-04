@@ -1,13 +1,36 @@
-edition = 2
+edition = 3
 
 [agent]
 name = "elevenlabs"
 version = "0.0.1"
+summary = "An agent that can use ElevenLabs for text-to-speech and audio processing."
+description = "An agent that can use ElevenLabs to generate high-quality audio from text, clone voices, and perform other audio tasks."
+readme = """
+# ElevenLabs Agent
+
+This agent provides access to ElevenLabs' advanced text-to-speech and voice cloning technologies. It can be used to generate human-like speech from text in various languages and styles.
+"""
+
+[agent.license]
+type = "text"
+text = "apache-2.0"
+
+[marketplace]
 
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
 MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
+
+[options.INITIAL_USER_PROMPT]
+type = "string"
+display.description = "The prompt to use for the initial user message."
+default = """
+[automated message] You are an autonomous agent designed to assist users by collaborating with other agents.
+If no instructions are provided, consider waiting for mentions until another agent provides further direction.
+Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way.
+"""
+display.multiline = true
 
 [options.EXTRA_SYSTEM_PROMPT]
 type = "string"
@@ -33,7 +56,7 @@ You are the the Elevenlabs agent, you have access to unique audio processing too
 display.multiline = true
 
 [runtimes.executable]
-command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-elevenlabs.exe"]
+path = "target/release/agent-elevenlabs"
 
 [runtimes.docker]
 image = "coralprotocol/agent-elevenlabs"

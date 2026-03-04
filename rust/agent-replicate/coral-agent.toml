@@ -1,13 +1,36 @@
-edition = 2
+edition = 3
 
 [agent]
 name = "replicate"
 version = "0.0.1"
+summary = "An agent that can use Replicate to run open-source AI models."
+description = "An agent that can use Replicate to run open-source AI models, including text-to-image, text-to-video, and more."
+readme = """
+# Replicate Agent
+
+This agent provides access to the Replicate API, allowing other agents to run a wide variety of open-source AI models. It can be used for image generation, video generation, and many other tasks.
+"""
+
+[agent.license]
+type = "text"
+text = "apache-2.0"
+
+[marketplace]
 
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
 MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
+
+[options.INITIAL_USER_PROMPT]
+type = "string"
+display.description = "The prompt to use for the initial user message."
+default = """
+[automated message] You are an autonomous agent designed to assist users by collaborating with other agents.
+If no instructions are provided, consider waiting for mentions until another agent provides further direction.
+Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way.
+"""
+display.multiline = true
 
 [options.EXTRA_SYSTEM_PROMPT]
 type = "string"
@@ -24,19 +47,18 @@ default = """
 """
 display.multiline = true
 
-# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_PROVIDER_URL
+# Secrets and model IDs are typically provided via environment variables, but can be configured as options.
 #[options.MODEL_PROVIDER_URL]
 #type = "string"
-#description = "The base URL for the LLM provider API (OpenAI compatible)"
+#display.description = "The base URL for the LLM provider API (OpenAI-compatible)"
 #default = "https://openrouter.ai/api/v1/chat/completions"
 
-# Uncomment this option to pass in the API key as an option instead of relying on additional_docker_environment.MODEL_API_KEY
-#MODEL_API_KEY = { type = "string", required = true, description = "The API key for the LLM provider (OpenAI compatible)" }
+# Secret API key: by default, kept in env; set base64=true to avoid quoting issues.
+#MODEL_API_KEY = { type = "string", required = true, display.description = "The API key for the LLM provider (OpenAI-compatible)", base64 = true }
 
-#MODEL_ID = { type = "string", default = "openai/gpt-5-mini", description = "The model ID to use for the LLM provider" }
+#MODEL_ID = { type = "string", default = "openai/gpt-5-mini", display.description = "The model ID to use for the LLM provider" }
 
-#DEVIN_API_KEY = { type = "string", display.description = "The devin.ai api key/token" }
-
+#REPLICATE_API_TOKEN = { type = "string", required = true, display.description = "The Replicate API token", base64 = true }
 
 [options.SYSTEM_PROMPT]
 type = "string"
@@ -48,7 +70,7 @@ these models to provide assistance to other agents.  It is important that the co
 display.multiline = true
 
 [runtimes.executable]
-command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-replicate.exe"]
+path = "target/release/agent-replicate"
 
 [runtimes.docker]
 image = "coralprotocol/agent-replicate"

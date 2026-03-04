@@ -19,7 +19,7 @@ async fn main() {
 
     let options = Options::parse().expect("An error occurred parsing the arguments");
 
-    let coral_mcp = McpConnectionBuilder::build_coral_sse()
+    let coral_mcp = McpConnectionBuilder::build_coral_streamable_http()
         .await
         .expect("Failed to connect to the Coral server");
 
@@ -33,27 +33,25 @@ async fn main() {
         .max_tokens(options.max_tokens as u64)
         .build();
 
-    let mut system_prompt = coral_mcp.prompt_with_resources_str(options.system_prompt);
+    let mut system_prompt = CompletionEvaluatedPrompt::from_string(options.system_prompt)
+        .all_resources(coral_mcp.clone());
 
-    if let Some(extra_system_prompt) = options.extra_system_prompt {
-        system_prompt = system_prompt.string(extra_system_prompt);
+    if let Some(extra_system_prompt) = &options.extra_system_prompt {
+        system_prompt = system_prompt.string(extra_system_prompt.to_string())
     }
 
     let claim_manager = ClaimManager::new()
         .mil_input_token_cost(AgentClaimAmount::Usd(1.250))
         .mil_output_token_cost(AgentClaimAmount::Usd(10.000));
 
-    let agent = Agent::new(completion_agent)
-        .preamble(system_prompt)
+    let agent = Agent::new(completion_agent, system_prompt)
         .claim_manager(claim_manager)
         .mcp_server(coral_mcp.clone())
         .mcp_server(elevenlabs);
 
-    let repeating_user_prompt =
-        CompletionEvaluatedPrompt::from_string(options.followup_user_prompt);
-
     let prompt_stream = repeating_prompt_stream(
-        repeating_user_prompt,
+        CompletionEvaluatedPrompt::from_string(options.initial_user_prompt),
+        CompletionEvaluatedPrompt::from_string(options.followup_user_prompt),
         options.iteration_delay.map(Duration::from_secs),
         options.max_iterations as usize,
     );

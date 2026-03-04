@@ -3,6 +3,19 @@ edition = 3
 [agent]
 name = "deepwiki"
 version = "0.0.1"
+summary = "An agent with special tools for gaining unique insights into GitHub repositories."
+description = "An agent that uses deep analysis to provide insights and documentation for GitHub repositories."
+readme = """
+# Deep Wiki Agent
+
+This agent is designed to help users understand and navigate GitHub repositories by providing deep insights and high-quality documentation.
+"""
+
+[agent.license]
+type = "text"
+text = "apache-2.0"
+
+[marketplace]
 
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
@@ -11,11 +24,13 @@ MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum
 
 [options.INITIAL_USER_PROMPT]
 type = "string"
+display.description = "The prompt to use for the initial user message."
 default = """
 [automated message] You are an autonomous agent designed to assist users by collaborating with other agents.
 If no instructions are provided, consider waiting for mentions until another agent provides further direction.
 Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way.
 """
+display.multiline = true
 
 [options.FOLLOWUP_USER_PROMPT]
 type = "string"
@@ -39,7 +54,7 @@ display.description = "Extra system text to append to the base system text"
 display.multiline = true
 
 [runtimes.executable]
-command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-deepwiki.exe"]
+path = "../target/release/agent-deepwiki"
 
 [runtimes.docker]
 image = "coralprotocol/agent-deepwiki"
