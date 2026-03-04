@@ -1,8 +1,21 @@
-edition = 2
+edition = 3
 
 [agent]
 name = "firecrawl"
 version = "0.0.1"
+summary = "An agent that can use Firecrawl to scrape the web and gather information."
+description = "An agent that can use Firecrawl to scrape the web and gather information."
+readme = """
+# Firecrawl Agent
+
+This is a simple agent that uses the Firecrawl API to scrape the web and gather information. It can be used to gather information for other agents, or to perform tasks that require web scraping.
+"""
+
+[agent.license]
+type = "text"
+text = "apache-2.0"
+
+[marketplace]
 
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
@@ -47,6 +60,7 @@ You are the Firecrawl agent.  You must use your unique Firecrawl tooling at requ
 display.multiline = true
 
 [runtimes.executable]
+path = "target\\release\\agent-firecrawl.exe"
 command = ["W:\\Coral\\agents\\rust\\target\\release\\agent-firecrawl.exe"]
 
 [runtimes.docker]

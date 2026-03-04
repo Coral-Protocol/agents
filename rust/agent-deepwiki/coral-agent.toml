@@ -1,4 +1,4 @@
-edition = 2
+edition = 3
 
 [agent]
 name = "deepwiki"
@@ -12,9 +12,9 @@ MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum
 [options.INITIAL_USER_PROMPT]
 type = "string"
 default = """
-[automated message] You are an autonomous agent designed to assist users by collaborating with other agents."
-"If no instructions are provided, consider waiting for mentions until another agent provides further direction."
-"Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way."
+[automated message] You are an autonomous agent designed to assist users by collaborating with other agents.
+If no instructions are provided, consider waiting for mentions until another agent provides further direction.
+Remember that 'I' am not the user, who is not directly reachable. Use tools to interact with other agents as necessary to fulfil the users needs. You will receive further automated messages this way.
 """
 
 [options.FOLLOWUP_USER_PROMPT]
