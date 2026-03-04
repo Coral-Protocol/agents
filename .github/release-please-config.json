@@ -1,0 +1,45 @@
+{
+  "bootstrap-sha": "cca6313e31014e64da802307b05d72afe1671d09",
+  "packages": {
+    "rust/agent-firecrawl": {
+      "release-type": "rust",
+      "package-name": "agent-firecrawl",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "coral-agent.toml"
+        }
+      ]
+    },
+    "rust/agent-deepwiki": {
+      "release-type": "rust",
+      "package-name": "agent-deepwiki",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "coral-agent.toml"
+        }
+      ]
+    },
+    "rust/agent-elevenlabs": {
+      "release-type": "rust",
+      "package-name": "agent-elevenlabs",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "coral-agent.toml"
+        }
+      ]
+    },
+    "rust/agent-replicate": {
+      "release-type": "rust",
+      "package-name": "agent-replicate",
+      "extra-files": [
+        {
+          "type": "toml",
+          "path": "coral-agent.toml"
+        }
+      ]
+    }
+  }
+}
