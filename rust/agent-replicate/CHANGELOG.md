@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.1.0...agent-replicate-v0.1.1) (2026-03-15)
+
+
+### Bug Fixes
+
+* more reasonable max total sesssion tokens ([aafc9e6](https://github.com/Coral-Protocol/agents/commit/aafc9e6de6a7754e01f103e165daad74d6b973a8))
+
 ## [0.1.0](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.0.1...agent-replicate-v0.1.0) (2026-03-15)
 
 
