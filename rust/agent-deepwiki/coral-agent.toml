@@ -2,7 +2,7 @@ edition = 3
 
 [agent]
 name = "deepwiki"
-version = "0.0.1"
+version = "0.1.0"
 summary = "An agent with special tools for gaining unique insights into GitHub repositories."
 description = "An agent that uses deep analysis to provide insights and documentation for GitHub repositories."
 readme = """
