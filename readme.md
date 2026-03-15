@@ -32,6 +32,13 @@ This repo follows [Conventional Commits](https://www.conventionalcommits.org/) s
 
 Because release-please operates per-path, a commit that only touches files under `rust/agent-firecrawl/` will only affect that agent's version. If a single commit touches multiple agents, each affected agent gets its own release PR entry.
 
+### Release-please configuration
+
+Two files at the repo root control release-please:
+
+- **`release-please-config.json`** — Declares each agent as a package, its release type (`rust` or `java`), and extra files to update (e.g. `coral-agent.toml`).
+- **`.release-please-manifest.json`** — Tracks the current released version of each agent. This file is updated automatically by release-please; do not edit it manually.
+
 ### Adding a new agent
 
 1. Create the agent directory under `rust/` or `koog/` following the existing structure. Include a `coral-agent.toml` manifest.
