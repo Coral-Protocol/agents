@@ -2,7 +2,7 @@ edition = 3
 
 [agent]
 name = "replicate"
-version = "0.1.0"
+version = "0.1.1"
 summary = "An agent that can use Replicate to run open-source AI models."
 description = "An agent that can use Replicate to run open-source AI models, including text-to-image, text-to-video, and more."
 readme = """
