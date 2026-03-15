@@ -7,7 +7,8 @@
       "extra-files": [
         {
           "type": "toml",
-          "path": "coral-agent.toml"
+          "path": "coral-agent.toml",
+          "jsonpath": "$.agent.version"
         }
       ]
     },
@@ -17,7 +18,8 @@
       "extra-files": [
         {
           "type": "toml",
-          "path": "coral-agent.toml"
+          "path": "coral-agent.toml",
+          "jsonpath": "$.agent.version"
         }
       ]
     },
@@ -27,7 +29,8 @@
       "extra-files": [
         {
           "type": "toml",
-          "path": "coral-agent.toml"
+          "path": "coral-agent.toml",
+          "jsonpath": "$.agent.version"
         }
       ]
     },
@@ -37,7 +40,8 @@
       "extra-files": [
         {
           "type": "toml",
-          "path": "coral-agent.toml"
+          "path": "coral-agent.toml",
+          "jsonpath": "$.agent.version"
         }
       ]
     }
