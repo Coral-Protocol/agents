@@ -20,7 +20,7 @@ text = "apache-2.0"
 [options]
 MAX_ITERATIONS = { type = "u32", default = 20, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
-MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
+MAX_TOKENS = { type = "u32", default = 45000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
 
 [options.INITIAL_USER_PROMPT]
 type = "string"
