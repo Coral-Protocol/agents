@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.0](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.1.1...agent-firecrawl-v0.2.0) (2026-03-17)
+
+
+### Features
+
+* Improve agent behaviour ([2b5ca29](https://github.com/Coral-Protocol/agents/commit/2b5ca299b2174072d6f25958a064e0202c63d0f6))
+
 ## [0.1.1](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.1.0...agent-firecrawl-v0.1.1) (2026-03-17)
 
 
