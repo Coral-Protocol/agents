@@ -95,7 +95,7 @@ jobs:
           steps.filter.outputs.changed == 'true' &&
           contains(fromJson(needs.release-please.outputs.paths_released || '[]'), matrix.agent.path)
         env:
-          CORAL_API_KEY: ${{ secrets.CORAL_API_KEY }}
+          CORAL_MARKETPLACE_API_KEY: ${{ secrets.CORAL_MARKETPLACE_API_KEY }}
           CORAL_MARKETPLACE_URL: ${{ vars.CORAL_MARKETPLACE_URL || 'https://marketplace.coralprotocol.ai' }}
         run: |
           # Use the manifest file for publishing
@@ -106,7 +106,7 @@ jobs:
           # POST to marketplace as per SKILL.md
           curl -s -w "\nHTTP_STATUS:%{http_code}" \
             -X POST "$CORAL_MARKETPLACE_URL/api/v1/agents" \
-            -H "Authorization: Bearer $CORAL_API_KEY" \
+            -H "Authorization: Bearer $CORAL_MARKETPLACE_API_KEY" \
             -H "Content-Type: text/plain" \
             --data-binary "@$MANIFEST_PATH" > response.txt
             
@@ -129,4 +129,4 @@ jobs:
           # # OLD_VERSION=$(...)
           # # SLUG=$(...)
           # # curl -X DELETE "$CORAL_MARKETPLACE_URL/api/v1/agents/$SLUG/versions/$OLD_VERSION" \
-          # #   -H "Authorization: Bearer $CORAL_API_KEY"
+          # #   -H "Authorization: Bearer $CORAL_MARKETPLACE_API_KEY"
