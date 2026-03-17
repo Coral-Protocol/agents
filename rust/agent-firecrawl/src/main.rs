@@ -45,7 +45,7 @@ async fn main() {
 
     let claim_manager = ClaimManager::new()
         .mil_input_token_cost(AgentClaimAmount::Usd(1.250))
-        .mil_output_token_cost(AgentClaimAmount::Usd(10.000));
+        .mil_output_token_cost(AgentClaimAmount::Usd(5.000));
 
     let agent = Agent::new(completion_agent, system_prompt)
         .claim_manager(claim_manager)

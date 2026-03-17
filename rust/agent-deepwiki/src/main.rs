@@ -37,7 +37,7 @@ async fn main() {
 
     let claim_manager = ClaimManager::new()
         .mil_input_token_cost(AgentClaimAmount::Usd(1.250))
-        .mil_output_token_cost(AgentClaimAmount::Usd(10.000));
+        .mil_output_token_cost(AgentClaimAmount::Usd(5.000));
 
     let mut system_prompt = CompletionEvaluatedPrompt::from_string(options.system_prompt)
         .all_resources(coral_mcp.clone());
