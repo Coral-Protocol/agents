@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.3](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.1.2...agent-replicate-v0.1.3) (2026-03-17)
+
+
+### Bug Fixes
+
+* reduce mil_output_token_cost to reflect new market conditions ([1ecaa09](https://github.com/Coral-Protocol/agents/commit/1ecaa0985747cdceb30029018c01245f9f991942))
+
 ## [0.1.2](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.1.1...agent-replicate-v0.1.2) (2026-03-17)
 
 
