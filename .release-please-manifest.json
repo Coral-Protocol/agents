@@ -1,8 +1,8 @@
 {
-  "rust/agent-firecrawl": "0.1.0",
-  "rust/agent-deepwiki": "0.1.0",
-  "rust/agent-elevenlabs": "0.1.0",
-  "rust/agent-replicate": "0.1.1",
+  "rust/agent-firecrawl": "0.1.1",
+  "rust/agent-deepwiki": "0.1.1",
+  "rust/agent-elevenlabs": "0.1.1",
+  "rust/agent-replicate": "0.1.2",
   "koog/agent-deepwiki": "0.0.1",
   "koog/agent-replicate": "0.0.1"
 }
