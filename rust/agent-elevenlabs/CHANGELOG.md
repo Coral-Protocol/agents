@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.1](https://github.com/Coral-Protocol/agents/compare/agent-elevenlabs-v0.1.0...agent-elevenlabs-v0.1.1) (2026-03-17)
+
+
+### Bug Fixes
+
+* more appropriate default max iterations ([1c4beeb](https://github.com/Coral-Protocol/agents/commit/1c4beebd1e8431451c4afd67919fc3d44d8b19cc))
+
 ## [0.1.0](https://github.com/Coral-Protocol/agents/compare/agent-elevenlabs-v0.0.1...agent-elevenlabs-v0.1.0) (2026-03-15)
 
 
