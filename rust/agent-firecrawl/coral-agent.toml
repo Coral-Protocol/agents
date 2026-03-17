@@ -20,7 +20,7 @@ text = "apache-2.0"
 [options]
 MAX_ITERATIONS = { type = "u32", default = 40, display.description = "The maximum number of LLM iterations (ignoring tool calls) to run." }
 ITERATION_DELAY = { type = "u64", display.description = "The number of seconds to wait between iterations.  If left unspecified, no delay will occur between iterations." }
-MAX_TOKENS = { type = "u32", default = 20000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
+MAX_TOKENS = { type = "u32", default = 45000, display.description = "The maximum number of tokens to use for this agent during the entire session." }
 
 [options.INITIAL_USER_PROMPT]
 type = "string"
@@ -32,33 +32,15 @@ Remember that 'I' am not the user, who is not directly reachable. Use tools to i
 """
 display.multiline = true
 
-[options.EXTRA_SYSTEM_PROMPT]
-type = "string"
-display.description = "Additional system prompt instructions to customize the agent's behavior."
-display.multiline = true
-
 [options.FOLLOWUP_USER_PROMPT]
 type = "string"
 display.description = "The prompt to use for follow-up iterations."
 default = """
-1. Use Coral tooling to wait for messages that you can provide assistance to
-2. Use Firecrawl tooling as requested by other agents
-3. Respond to the agent that needed assistance using Coral tooling
+[automated message] Continue fulfilling your responsibilities collaboratively to the best of your ability.
 """
 display.multiline = true
 
-# Secrets and model IDs are typically provided via environment variables, but can be configured as options.
-#[options.MODEL_PROVIDER_URL]
-#type = "string"
-#display.description = "The base URL for the LLM provider API (OpenAI-compatible)"
-#default = "https://openrouter.ai/api/v1/chat/completions"
-
-# Secret API key: by default, kept in env; set base64=true to avoid quoting issues.
-#MODEL_API_KEY = { type = "string", required = true, display.description = "The API key for the LLM provider (OpenAI-compatible)", base64 = true }
-
-#MODEL_ID = { type = "string", default = "openai/gpt-5-mini", display.description = "The model ID to use for the LLM provider" }
-
-#FIRECRAWL_API_KEY = { type = "string", display.description = "The firecrawl.dev api key", base64 = true }
+# TODO: Add firecrawl API key option for convenience of local users
 
 [options.SYSTEM_PROMPT]
 type = "string"
@@ -66,6 +48,11 @@ display.description = "The system prompt to use"
 default = """
 You are the Firecrawl agent.  You must use your unique Firecrawl tooling at request by other agents.
 """
+display.multiline = true
+
+[options.EXTRA_SYSTEM_PROMPT]
+type = "string"
+display.description = "Additional system prompt instructions to customize the agent's behavior."
 display.multiline = true
 
 [runtimes.executable]
