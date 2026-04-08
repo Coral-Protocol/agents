@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.4](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.3...agent-firecrawl-v0.2.4) (2026-04-08)
+
+
+### Bug Fixes
+
+* trigger again now email verified ([5b239d0](https://github.com/Coral-Protocol/agents/commit/5b239d06283b45aeb9c3010eafa0a98c82b7330f))
+
 ## [0.2.3](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.2...agent-firecrawl-v0.2.3) (2026-04-08)
 
 
