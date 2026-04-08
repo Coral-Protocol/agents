@@ -49,7 +49,7 @@ secret = true
 type = "string"
 display.description = "The system prompt to use"
 default = """
-You are the Firecrawl agent.  You must use your unique Firecrawl tooling at request by other agents.
+You are the Firecrawl agent. You must use your unique Firecrawl tooling at request by other agents.
 """
 display.multiline = true
 
