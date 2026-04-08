@@ -12,6 +12,10 @@ cargo build --release
 
 This repository uses a GitHub Actions workflow (`.github/workflows/build-and-push.yml`) that automatically builds, pushes, and publishes agents when changes are merged to `main`.
 
+### Known issues
+
+* Pushing to the marketplace is skipped when it shouldn't be if you re-run the task,
+
 ### How it works
 
 1. **Change detection** — Each agent is evaluated independently using [dorny/paths-filter](https://github.com/dorny/paths-filter). Only agents whose files actually changed are built. For Koog agents, changes to `koog/shared/` also trigger a build since it is a shared dependency.

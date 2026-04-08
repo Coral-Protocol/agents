@@ -42,7 +42,7 @@ display.multiline = true
 
 [options.FIRECRAWL_API_KEY]
 type = "string"
-display.description = "The API key to use for Firecrawl.  You can obtain an API key by signing up for a free account at https://firecrawl.com"
+display.description = "The API key to use for Firecrawl. You can obtain an API key by signing up for a free account at https://firecrawl.com"
 secret = true
 
 [options.SYSTEM_PROMPT]
