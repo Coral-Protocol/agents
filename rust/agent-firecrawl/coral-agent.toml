@@ -40,7 +40,10 @@ default = """
 """
 display.multiline = true
 
-# TODO: Add firecrawl API key option for convenience of local users
+[options.FIRECRAWL_API_KEY]
+type = "string"
+display.description = "The API key to use for Firecrawl.  You can obtain an API key by signing up for a free account at https://firecrawl.com"
+secret = true
 
 [options.SYSTEM_PROMPT]
 type = "string"
