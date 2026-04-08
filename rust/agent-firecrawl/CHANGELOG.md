@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.3](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.2...agent-firecrawl-v0.2.3) (2026-04-08)
+
+
+### Bug Fixes
+
+* document known issue that push to marketplace doesn't work on reruns ([03900ba](https://github.com/Coral-Protocol/agents/commit/03900ba29a1639811d872ad570d81d7d671818cf))
+
 ## [0.2.2](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.1...agent-firecrawl-v0.2.2) (2026-04-08)
 
 
