@@ -9,6 +9,8 @@ readme = """
 # Firecrawl Agent
 
 This is a simple agent that uses the Firecrawl API to scrape the web and gather information. It can be used to gather information for other agents, or to perform tasks that require web scraping.
+
+This agent supports bringing your own key if ran locally.
 """
 
 [agent.license]
