@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.1.4](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.1.3...agent-replicate-v0.1.4) (2026-04-09)
+
+
+### Bug Fixes
+
+* remove executable runtimes from rust agents that they'll never work with ([f4a8bc5](https://github.com/Coral-Protocol/agents/commit/f4a8bc58c99178bcc5406233e27c08b654f79864))
+
 ## [0.1.3](https://github.com/Coral-Protocol/agents/compare/agent-replicate-v0.1.2...agent-replicate-v0.1.3) (2026-03-17)
 
 

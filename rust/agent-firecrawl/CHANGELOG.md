@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.6](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.5...agent-firecrawl-v0.2.6) (2026-04-09)
+
+
+### Bug Fixes
+
+* remove executable runtimes from rust agents that they'll never work with ([f4a8bc5](https://github.com/Coral-Protocol/agents/commit/f4a8bc58c99178bcc5406233e27c08b654f79864))
+
 ## [0.2.5](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.4...agent-firecrawl-v0.2.5) (2026-04-09)
 
 

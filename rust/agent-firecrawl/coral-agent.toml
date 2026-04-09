@@ -2,7 +2,7 @@ edition = 3
 
 [agent]
 name = "firecrawl"
-version = "0.2.5"
+version = "0.2.6"
 summary = "An agent that can use Firecrawl to scrape the web and gather information."
 description = "An agent that can use Firecrawl to scrape the web and gather information."
 readme = """

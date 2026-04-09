@@ -2,7 +2,7 @@ edition = 3
 
 [agent]
 name = "elevenlabs"
-version = "0.1.2"
+version = "0.1.3"
 summary = "An agent that can use ElevenLabs for text-to-speech and audio processing."
 description = "An agent that can use ElevenLabs to generate high-quality audio from text, clone voices, and perform other audio tasks."
 readme = """
