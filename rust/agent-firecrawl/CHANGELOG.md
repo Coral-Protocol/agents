@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.5](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.4...agent-firecrawl-v0.2.5) (2026-04-09)
+
+
+### Bug Fixes
+
+* describe firecrawl api situation ([817860c](https://github.com/Coral-Protocol/agents/commit/817860c673bfceaac2b34f87955aee4019a0c24d))
+
 ## [0.2.4](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.3...agent-firecrawl-v0.2.4) (2026-04-08)
 
 

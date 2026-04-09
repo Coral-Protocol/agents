@@ -1,5 +1,5 @@
 {
-  "rust/agent-firecrawl": "0.2.4",
+  "rust/agent-firecrawl": "0.2.5",
   "rust/agent-deepwiki": "0.1.2",
   "rust/agent-elevenlabs": "0.1.2",
   "rust/agent-replicate": "0.1.3",
