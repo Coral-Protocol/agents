@@ -60,8 +60,8 @@ type = "string"
 display.description = "Additional system prompt instructions to customize the agent's behavior."
 display.multiline = true
 
-[runtimes.executable]
-path = "../target/release/agent-firecrawl"
+#[runtimes.executable]
+#path = "../target/release/agent-firecrawl"
 
 [runtimes.docker]
 image = "coralprotocol/agent-firecrawl"

@@ -53,8 +53,8 @@ type = "string"
 display.description = "Extra system text to append to the base system text"
 display.multiline = true
 
-[runtimes.executable]
-path = "../target/release/agent-deepwiki"
+#[runtimes.executable]
+#path = "../target/release/agent-deepwiki"
 
 [runtimes.docker]
 image = "coralprotocol/agent-deepwiki"
