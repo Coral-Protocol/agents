@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.7](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.6...agent-firecrawl-v0.2.7) (2026-04-09)
+
+
+### Bug Fixes
+
+* temporarily remove firecrawl api key ([0ac975f](https://github.com/Coral-Protocol/agents/commit/0ac975f8ecef1ef4dbdfa3c12ea639809183b865))
+
 ## [0.2.6](https://github.com/Coral-Protocol/agents/compare/agent-firecrawl-v0.2.5...agent-firecrawl-v0.2.6) (2026-04-09)
 
 
