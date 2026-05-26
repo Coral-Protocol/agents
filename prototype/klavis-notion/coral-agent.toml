@@ -1,0 +1,135 @@
+edition = 4
+
+[agent]
+name = "klavis-notion"
+version = "1.0.0"
+license = { type = "spdx", expression = "MIT" }
+
+description = "An agent with access to a Notion workspace"
+
+summary = "A KlavisAI Notion agent."
+readme = """
+This agent requires a Klavis AI account. 
+
+1. Create an account on [KlavisAI](https://klavis.ai/) if you don't have one.
+2. Find the Notion MCP server
+3. Authorize Klavis to access your Notion account
+4. Hit "Show Individual Server URL" and use the value for this agent's `KLAVIS_MCP_URL` option.
+
+Warning: Consider enabling read only mode in Klavis.  If this agent is given read and write access it potentially violates the [Rule of Two](https://ai.meta.com/blog/practical-ai-agent-security/)
+"""
+
+[[llm.proxies]]
+name = "OPENAI"
+format.type = "OpenAI"
+models = ["gpt-5.1-mini"]
+
+[runtimes.prototype]
+iterations = { type = "option", name = "ITERATION_COUNT" }
+delay = { type = "option", name = "ITERATION_DELAY" }
+proxy = "OPENAI"
+
+[[runtimes.prototype.tools]]
+type = "mcp_streamable_http"
+url = { type = "option", name = "KLAVIS_MCP_URL" }
+
+[runtimes.prototype.prompts.system]
+base = { type = "option", name = "BASE_SYSTEM_PROMPT" }
+extra = { type = "option", name = "EXTRA_SYSTEM_PROMPT" }
+
+[runtimes.prototype.prompts.loop]
+initial.base = { type = "option", name = "LOOP_INITIAL_BASE_PROMPT" }
+initial.extra = { type = "option", name = "LOOP_INITIAL_EXTRA_PROMPT" }
+followup = { type = "option", name = "LOOP_FOLLOWUP_PROMPT" }
+
+##
+## Klavis
+##
+[options.KLAVIS_MCP_URL]
+type = "string"
+required = true
+secret = true
+display.group = "KlavisAI"
+display.description = "Example: https://mcp-server.klavis.ai/mcp/?instance_id=..."
+
+##
+## Prompts
+##
+[options.BASE_SYSTEM_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = { type = "constant", name = "PROTOTYPE_DEFAULT_SYSTEM_PROMPT" }
+
+[options.EXTRA_SYSTEM_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = """
+You are an agent with special tools to interact with Notion.  The following Notion tools are available: 
+
+# Users
+- get_user
+- get_users 
+- get_self 
+
+# Databases
+- post_database_query
+- create_a_database
+- update_a_database
+- retrieve_a_database
+
+# Search
+- post_search 
+
+# Blocks
+- get_block_children
+- patch_block_children
+- retrieve_a_block
+- update_a_block
+- delete_a_block
+
+# Pages 
+- retrieve_a_page
+- patch_page 
+- post_page
+- retrieve_a_page_property
+
+# Comments
+- retrieve_a_comment
+- create_a_comment
+"""
+
+[options.LOOP_INITIAL_BASE_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = { type = "constant", name = "PROTOTYPE_DEFAULT_LOOP_INITIAL_BASE_PROMPT" }
+
+[options.LOOP_INITIAL_EXTRA_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+required = false
+default = ""
+
+[options.LOOP_FOLLOWUP_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = { type = "constant", name = "PROTOTYPE_DEFAULT_LOOP_FOLLOWUP_PROMPT" }
+
+##
+## Iteration control
+## 
+[options.ITERATION_COUNT]
+type = "i32"
+display.group = "Iteration"
+display.description = "Number of times the agent will loop, taking actions and observing results, before it stops."
+default = 20
+
+[options.ITERATION_DELAY]
+type = "i32"
+display.group = "Iteration"
+display.description = "Delay between each iteration of the agent's loop, in milliseconds."
+default = 0
