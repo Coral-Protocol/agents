@@ -1,0 +1,95 @@
+edition = 4
+
+[agent]
+name = "taskmaster"
+version = "1.0.0"
+license = { type = "spdx", expression = "MIT" }
+
+description = "Authorative agent.  This agent is responsible for providing tasks to other agents."
+
+summary = "An agent designed to route a designated task to the appropriate agents based on their capabilities."
+readme = """
+This is a basic agent is designed to route a given task to other agents in the graph.
+
+Tips:
+- Make sure this agent is in a group with all agents that can assist with the task
+- If you expect the output of the task to be given as a message in Coral, provide this agent with a custom tool to allow it to export that output.
+- If the task does not have output, consider giving this agent the `coral_close_session` tool so it can end the session when the task is complete.
+"""
+
+[[llm.proxies]]
+name = "OPENAI"
+format.type = "OpenAI"
+models = ["gpt-5.5", "gpt-5.4", "gpt-5.2", "gpt-5.1", "gpt-5", "gpt-4.1"]
+
+[runtimes.prototype]
+proxy = "OPENAI"
+iterations = { type = "option", name = "ITERATION_COUNT" }
+delay = { type = "option", name = "ITERATION_DELAY" }
+
+[runtimes.prototype.prompts.system]
+base = { type = "option", name = "BASE_SYSTEM_PROMPT" }
+extra = { type = "option", name = "EXTRA_SYSTEM_PROMPT" }
+
+[runtimes.prototype.prompts.loop.initial.base]
+type = "composed_string"
+parts = [
+    { type = "inline", value = "You have been given a task.  You must accomplish this task by delegating it to other agents.  You must not attempt to complete this task yourself.  Read other agents descriptions carefully, formulate a plan, and delegate appropriately." },
+    { type = "inline", value = "The task is:" },
+    { type = "option", name = "TASK" },
+]
+
+[runtimes.prototype.prompts.loop]
+initial.extra = { type = "option", name = "LOOP_INITIAL_EXTRA_PROMPT" }
+followup = { type = "option", name = "LOOP_FOLLOWUP_PROMPT" }
+
+##
+## Prompts
+##
+[options.TASK]
+type = "string"
+required = true
+display.multiline = true
+display.group = "Prompts"
+display.description = "The task that this agent is responsible for routing to other agents."
+
+[options.BASE_SYSTEM_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = { type = "constant", name = "PROTOTYPE_DEFAULT_SYSTEM_PROMPT" }
+
+[options.EXTRA_SYSTEM_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = """
+"""
+
+[options.LOOP_INITIAL_EXTRA_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+required = false
+default = ""
+
+[options.LOOP_FOLLOWUP_PROMPT]
+type = "string"
+display.multiline = true
+display.group = "Prompts"
+default = "[automated message] Monitor agents progress in completing their task.  Do not send unnecessary messages.  If agents are not making progress towards completing the task, give them new instructions or delegate to different agents."
+
+##
+## Iteration control
+## 
+[options.ITERATION_COUNT]
+type = "i32"
+display.group = "Iteration"
+display.description = "Number of times the agent will loop, taking actions and observing results, before it stops."
+default = 20
+
+[options.ITERATION_DELAY]
+type = "i32"
+display.group = "Iteration"
+display.description = "Delay between each iteration of the agent's loop, in milliseconds."
+default = 0
